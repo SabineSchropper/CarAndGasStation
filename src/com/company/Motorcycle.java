@@ -3,24 +3,23 @@ package com.company;
 import java.util.Objects;
 import java.util.Random;
 
-public class Car extends Vehicle {
+public class Motorcycle extends Vehicle {
 
-    double consumptionOfFuel = 7.2;
+    double consumptionOfFuel = 5.2;
     double actualConsumptionOfFuel;
     double distance;
     String output = "";
-    Random random =  new Random();
+    Random random = new Random();
 
-    public Car(String brand, Enum typeOfFuel, int performance) {
+    public Motorcycle(String brand, Enum typeOfFuel, int performance) {
         super(brand, typeOfFuel, performance);
-        setKilometerToService(25000);
-        setVolumeOfTank(40);
-        setMileage(10000);
+        setKilometerToService(30000);
+        setVolumeOfTank(20);
+        setMileage(5000);
     }
 
     @Override
     public void drive(Cities startCity, Cities destinationCity) {
-
         if ((startCity == Cities.INTOTHEBLUE) || (destinationCity == Cities.INTOTHEBLUE)) {
             distance = random.nextInt(100);
         } else {
@@ -31,11 +30,11 @@ public class Car extends Vehicle {
         }
         this.mileage = mileage + distance;
 
-        if (mileage > (kilometerToService - 1000)) {
+        if (mileage > (kilometerToService-1000)) {
             System.out.println("In weniger als 1000 km wird ein Service empfohlen.");
         }
 
-        conditionOfTires = conditionOfTires - (distance * 0.01);
+        conditionOfTires = conditionOfTires - (distance * 0.03);
 
         if (conditionOfTires < 30) {
             System.out.println("Ein Reifenwechsel wird zu Ihrer Sicherheit empfohlen.");

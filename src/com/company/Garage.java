@@ -4,7 +4,7 @@ public class Garage {
     String name;
     String manager;
     String location;
-    Car customerCar;
+    Vehicle customerVehicle;
     Driver customer;
     double account = 10000;
     double priceToPay;
@@ -15,22 +15,38 @@ public class Garage {
         this.location = location;
     }
 
-    public void makeService(Car car, Driver driver){
-        this.customerCar = car;
+    public void makeService(Vehicle customerVehicle, Driver driver){
+        this.customerVehicle = customerVehicle;
         this.customer = driver;
 
-        customerCar.kilometerToService = 30000;
-        priceToPay = 300;
+        customerVehicle.setMileage(0);
+        if (customerVehicle.brand.equalsIgnoreCase("opel")){
+            priceToPay = 300;
+        }
+        else if (customerVehicle.brand.equalsIgnoreCase("TruckBrand")){
+            priceToPay = 500;
+        }
+        else {
+            priceToPay = 250;
+        }
         account = account + priceToPay;
         customer.money = customer.money - priceToPay;
 
     }
-    public void buyNewWheels(Car car, Driver driver){
-        this.customerCar = car;
+    public void buyNewWheels(Vehicle customerVehicle, Driver driver){
+        this.customerVehicle = customerVehicle;
         this.customer = driver;
 
-        customerCar.conditionOfTires = 100;
-        priceToPay = 250;
+        if (customerVehicle.brand.equalsIgnoreCase("opel")){
+            priceToPay = 200;
+        }
+        else if (customerVehicle.brand.equalsIgnoreCase("TruckBrand")){
+            priceToPay = 250;
+        }
+        else {
+            priceToPay = 150;
+        }
+        customerVehicle.conditionOfTires = 100;
         account = account + priceToPay;
         customer.money = customer.money - priceToPay;
     }

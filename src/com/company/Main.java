@@ -5,11 +5,13 @@ public class Main {
     public static void main(String[] args) {
         String output = "";
 
-        Car opelKarl = new Car("Opel", 55, "Benzin");
+        Car opelKarl = new Car("Opel", TypeOfFuel.BENZIN, 55);
         GasStation station = new GasStation("Jet", "Feldkirch","Dieter Kraft");
         Driver driver = new Driver("Anton",30);
         Driver driver1 = new Driver("Olivia",25);
         Garage garage = new Garage("Werkstatt","Andreas Schrauber", "Rankweil");
+        Motorcycle yamaha = new Motorcycle("Yamaha", TypeOfFuel.BENZIN, 70);
+        Truck truck = new Truck("TruckBrand",TypeOfFuel.BENZIN, 40);
 
 
         opelKarl.drive(Cities.BLUDENZ,Cities.BREGENZ);
@@ -63,6 +65,22 @@ public class Main {
 
         output = opelKarl.getStatusOutput();
         System.out.println(output);
+
+        yamaha.drive(Cities.BLUDENZ,Cities.FELDKIRCH);
+
+        output = yamaha.getStatusOutput();
+        System.out.println(output);
+
+        truck.drive(Cities.BLUDENZ,Cities.FELDKIRCH);
+
+        output = truck.getStatusOutput();
+        System.out.println(output);
+
+        garage.buyNewWheels(truck,driver);
+        output = truck.getStatusOutput();
+        System.out.println(output);
+
+        System.out.println(driver.toString());
 
     }
 }
