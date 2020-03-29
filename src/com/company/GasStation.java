@@ -1,6 +1,8 @@
 package com.company;
 
-public class GasStation {
+import java.io.IOException;
+
+public class GasStation extends BillWriting {
     String nameOfStation;
     String location;
     String manager;
@@ -11,7 +13,7 @@ public class GasStation {
     Vehicle customerVehicle;
     Driver customer;
 
-    public GasStation(String nameOfStation, String location, String manager) {
+    public GasStation(String nameOfStation, String location, String manager){
         this.nameOfStation = nameOfStation;
         this.location = location;
         this.manager = manager;
@@ -20,6 +22,7 @@ public class GasStation {
     public void fillFuel(Vehicle vehicleToFillFuelIn, Driver customer){
         this.customerVehicle = vehicleToFillFuelIn;
         this.customer = customer;
+        String service = "Fill fuel";
 
         if(customerVehicle.typeOfFuel == TypeOfFuel.BENZIN){
             priceToPay = (customerVehicle.volumeOfTank - customerVehicle.fuelDisplay) * pricePerLiterBenzin;
@@ -33,7 +36,21 @@ public class GasStation {
         account = account + priceToPay;
         customer.money = customer.money - priceToPay;
 
+        addToBill(service, priceToPay);
+
+
+
     }
 
+    @Override
+    public void addToBill(String service, double priceToPay){
+        try {
+            mywriter.write(customer.nameOfDriver + ";" + customerVehicle.brand+ ";" + service + ";" + priceToPay +";\n");
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+    }
 
 }

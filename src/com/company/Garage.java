@@ -1,6 +1,8 @@
 package com.company;
 
-public class Garage {
+import java.io.IOException;
+
+public class Garage extends BillWriting{
     String name;
     String manager;
     String location;
@@ -9,15 +11,17 @@ public class Garage {
     double account = 10000;
     double priceToPay;
 
-    public Garage(String name, String manager, String location) {
+    public Garage(String name, String manager, String location){
         this.name = name;
         this.manager = manager;
         this.location = location;
     }
 
+
     public void makeService(Vehicle customerVehicle, Driver driver){
         this.customerVehicle = customerVehicle;
         this.customer = driver;
+        String service = "Service";
 
         customerVehicle.setMileage(0);
         if (customerVehicle.brand.equalsIgnoreCase("opel")){
@@ -32,10 +36,14 @@ public class Garage {
         account = account + priceToPay;
         customer.money = customer.money - priceToPay;
 
+        addToBill(service,priceToPay);
+
+
     }
     public void buyNewWheels(Vehicle customerVehicle, Driver driver){
         this.customerVehicle = customerVehicle;
         this.customer = driver;
+        String service = "New Wheels";
 
         if (customerVehicle.brand.equalsIgnoreCase("opel")){
             priceToPay = 200;
@@ -49,8 +57,20 @@ public class Garage {
         customerVehicle.conditionOfTires = 100;
         account = account + priceToPay;
         customer.money = customer.money - priceToPay;
+        addToBill(service,priceToPay);
     }
 
+
+    @Override
+    public void addToBill(String service, double priceToPay) {
+            try {
+                mywriter.write(customer.nameOfDriver + ";" + customerVehicle.brand + ";" + service + ";" + priceToPay+";\n");
+            }
+            catch (IOException ex){
+                ex.printStackTrace();
+            }
+
+    }
 
 
 }
